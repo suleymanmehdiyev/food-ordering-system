@@ -38,21 +38,21 @@ public class Order extends AggregateRoot<OrderId> {
 
     public void pay(){
         if(orderStatus != OrderStatus.PENDING){
-            throw new OrderDomainException(String.format(ErrorConstant.ORDER_IS_NOT_CORRECT_STATE_FOR_OPERATION.getResponse(),"pay"));
+            throw new OrderDomainException(String.format(ErrorConstant.ORDER_IS_NOT_CORRECT_STATE_FOR_OPERATION.getValue(),"pay"));
         }
         orderStatus = OrderStatus.PAID;
     }
 
     public void approve(){
         if(orderStatus != OrderStatus.PAID){
-            throw new OrderDomainException(String.format(ErrorConstant.ORDER_IS_NOT_CORRECT_STATE_FOR_OPERATION.getResponse(),"approve"));
+            throw new OrderDomainException(String.format(ErrorConstant.ORDER_IS_NOT_CORRECT_STATE_FOR_OPERATION.getValue(),"approve"));
         }
         orderStatus = OrderStatus.APPROVED;
     }
 
     public void initCancel(List<String> failureMessages){
         if(orderStatus != OrderStatus.PAID){
-            throw new OrderDomainException(String.format(ErrorConstant.ORDER_IS_NOT_CORRECT_STATE_FOR_OPERATION.getResponse(),"initCancel"));
+            throw new OrderDomainException(String.format(ErrorConstant.ORDER_IS_NOT_CORRECT_STATE_FOR_OPERATION.getValue(),"initCancel"));
         }
         orderStatus = OrderStatus.CANCELLING;
         updateFailureMessages(failureMessages);
@@ -60,7 +60,7 @@ public class Order extends AggregateRoot<OrderId> {
 
     public void cancel(List<String> failureMessages){
         if(!(orderStatus == OrderStatus.CANCELLING || orderStatus == OrderStatus.PENDING)){
-            throw new OrderDomainException(String.format(ErrorConstant.ORDER_IS_NOT_CORRECT_STATE_FOR_OPERATION.getResponse(),"cancel"));
+            throw new OrderDomainException(String.format(ErrorConstant.ORDER_IS_NOT_CORRECT_STATE_FOR_OPERATION.getValue(),"cancel"));
         }
         orderStatus = OrderStatus.CANCELLED;
         updateFailureMessages(failureMessages);
@@ -78,17 +78,17 @@ public class Order extends AggregateRoot<OrderId> {
 
     private void validateInitialOrder() {
         if(orderStatus != null || getId() != null){
-            throw new OrderDomainException(ErrorConstant.ORDER_IS_NOT_CORRECT.getResponse());
+            throw new OrderDomainException(ErrorConstant.ORDER_IS_NOT_CORRECT.getValue());
         }
     }
 
     private void validateTotalPrice() {
         if(price == null || !price.isGreaterThanZero()){
-            throw new OrderDomainException(ErrorConstant.MUST_BE_GREATER_THAN_ZERO.getResponse());
+            throw new OrderDomainException(ErrorConstant.MUST_BE_GREATER_THAN_ZERO.getValue());
         }
     }
 
-    private void validateItemsPrice() {
+    private void  validateItemsPrice() {
       Money orderItemsTotal =  items.stream().map(orderItem -> {
             validateItemPrice(orderItem);
             return orderItem.getSubTotal();
@@ -96,14 +96,14 @@ public class Order extends AggregateRoot<OrderId> {
 
       if(!price.equals(orderItemsTotal)){
           throw new OrderDomainException(String.format(
-                  ErrorConstant.TOTAL_PRICE_NOT_EQUAL_ORDER_ITEMS_TOTAL_PRICE.getResponse(),price.getAmount(),
+                  ErrorConstant.TOTAL_PRICE_NOT_EQUAL_ORDER_ITEMS_TOTAL_PRICE.getValue(),price.getAmount(),
                   orderItemsTotal.getAmount()));
       }
     }
 
     private void validateItemPrice(OrderItem orderItem) {
         if(!orderItem.isPriceValid()){
-            throw new OrderDomainException(String.format(ErrorConstant.ORDER_ITEM_PRICE_NOT_VALID.getResponse(),
+            throw new OrderDomainException(String.format(ErrorConstant.ORDER_ITEM_PRICE_NOT_VALID.getValue(),
                     orderItem.getPrice().getAmount(),orderItem.getProduct().getId().getValue()));
         }
     }
