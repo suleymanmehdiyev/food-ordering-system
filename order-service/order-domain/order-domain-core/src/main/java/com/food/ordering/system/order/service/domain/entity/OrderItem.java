@@ -5,6 +5,8 @@ import com.food.ordering.system.domain.valueobject.Money;
 import com.food.ordering.system.domain.valueobject.OrderId;
 import com.food.ordering.system.order.service.domain.valueobject.OrderItemId;
 
+import java.math.BigDecimal;
+
 public class OrderItem  extends BaseEntity<OrderItemId> {
     private OrderId orderId;
     private final Product product;

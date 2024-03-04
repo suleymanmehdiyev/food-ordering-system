@@ -178,8 +178,27 @@ public class Order extends AggregateRoot<OrderId> {
         private Builder() {
         }
 
-        public Builder id(OrderId val) {
-            orderId = val;
+        public Builder orderId(OrderId orderId) {
+            orderId = orderId;
+            return this;
+        }
+
+        public Builder customerId(CustomerId customerId) {
+            customerId = customerId;
+            return this;
+        }
+
+        public Builder restaurantId(RestaurantId restaurantId) {
+            restaurantId = restaurantId;
+            return this;
+        }
+
+        public Builder deliveryAddress(StreetAddress deliveryAddress) {
+            deliveryAddress = deliveryAddress;
+            return this;
+        }
+        public Builder price(Money price) {
+            price = price;
             return this;
         }
 
@@ -190,6 +209,11 @@ public class Order extends AggregateRoot<OrderId> {
 
         public Builder orderStatus(OrderStatus val) {
             orderStatus = val;
+            return this;
+        }
+
+        public Builder items(List<OrderItem> items) {
+            items = items;
             return this;
         }
 

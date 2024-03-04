@@ -1,0 +1,25 @@
+
+^
+java:S1854¶";Remove this useless assignment to local variable "orderId".(æ¨…ıÿÿÿÿ8Œ…µÎà1
+R
+java:S1656¶"/Remove or correct this useless self-assignment.(æ¨…ıÿÿÿÿ8…µÎà1
+a
+java:S1854»">Remove this useless assignment to local variable "customerId".(ÙŸ›Óşÿÿÿÿ8ä®¶Îà1
+R
+java:S1656»"/Remove or correct this useless self-assignment.(ÙŸ›Óşÿÿÿÿ8´µÎà1
+c
+java:S1854À"@Remove this useless assignment to local variable "restaurantId".(Şë»Œüÿÿÿÿ8ª­·Îà1
+R
+java:S1656À"/Remove or correct this useless self-assignment.(Şë»Œüÿÿÿÿ8„Ò¶Îà1
+f
+java:S1854Å"CRemove this useless assignment to local variable "deliveryAddress".(áà—¾şÿÿÿÿ8Àò¸Îà1
+R
+java:S1656Å"/Remove or correct this useless self-assignment.(áà—¾şÿÿÿÿ8áÒ·Îà1
+V
+java:S1854É"9Remove this useless assignment to local variable "price".(›ÏÃK8®šºÎà1
+L
+java:S1656É"/Remove or correct this useless self-assignment.(›ÏÃK8ä–¹Îà1
+W
+java:S1854Ø"9Remove this useless assignment to local variable "items".(«ñÁä8íãÈÎà1
+M
+java:S1656Ø"/Remove or correct this useless self-assignment.(«ñÁä8îãÈÎà1

@@ -26,7 +26,7 @@ public class OrderDomainServiceImpl implements OrderDomainService{
         setOrderProductInformation(order,restaurant);
         order.validateOrder();
         order.initializeOrder();
-        log.info("Order with id: {} is initiated",order.getId().getValue());
+        log.info("Order with restaurantId: {} is initiated",order.getId().getValue());
         return new OrderCreatedEvent(order, ZonedDateTime.now(ZoneId.of(UTC)));
     }
 
@@ -36,28 +36,28 @@ public class OrderDomainServiceImpl implements OrderDomainService{
     @Override
     public OrderPaidEvent payOrder(Order order) {
         order.pay();
-        log.info("Order with id: {} is paid",order.getId().getValue());
+        log.info("Order with restaurantId: {} is paid",order.getId().getValue());
         return new OrderPaidEvent(order,ZonedDateTime.now(ZoneId.of(UTC)));
     }
 
     @Override
     public void approveOrder(Order order) {
         order.approve();
-        log.info("Order with id: {} is approved",order.getId().getValue());
+        log.info("Order with restaurantId: {} is approved",order.getId().getValue());
 
     }
 
     @Override
     public OrderCancelledEvent cancelOrderPayment(Order order, List<String> failureMessages) {
         order.initCancel(failureMessages);
-        log.info("Order payment is cancelling for order id: {}",order.getId().getValue());
+        log.info("Order payment is cancelling for order restaurantId: {}",order.getId().getValue());
         return new OrderCancelledEvent(order,ZonedDateTime.now(ZoneId.of(UTC)));
     }
 
     @Override
     public void cancelOrder(Order order, List<String> failureMessages) {
         order.cancel(failureMessages);
-        log.info("Order with id: {} is cancelled",order.getId().getValue());
+        log.info("Order with restaurantId: {} is cancelled",order.getId().getValue());
     }
     private void validateRestaurant(Restaurant restaurant) {
         if(!restaurant.isActive()){
